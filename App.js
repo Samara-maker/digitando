@@ -1,20 +1,24 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { useState } from 'react';
+import { View, Text, TextInput, Button } from 'react-native';
 
-export default function App() {
+export default function Espelho({ placeholder, label = "Você digitou:" }) {
+  const [texto, setTexto] = useState(''); /**USUARIO, DIGITE AQUI */
+
+  const limpar = () => {
+    setTexto('');
+  };
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
+    <View>
+      <TextInput
+        placeholder={placeholder}
+        value={texto}
+        onChangeText={setTexto}
+      />
+      <Text>
+        {texto ? `${label} ${texto}` : 'Nada digitado ainda..'}
+      </Text>
+      <Button title="Limpar" onPress={limpar} />
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
